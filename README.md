@@ -6,7 +6,7 @@ An early-stage, locally runnable proof of concept for maternal-health informatio
 
 ## What is included
 
-- Browser-based maternal-care information experience.
+- Browser-based maternal-care information experience served by the Python application.
 - Source-linked starter information on antenatal care, postnatal care, selected warning signs and emotional wellbeing.
 - Local retrieval of relevant starter information.
 - Demonstration phrase detection that displays an urgent-care message for selected phrases. It is not a comprehensive triage engine.
@@ -44,9 +44,15 @@ curl -X POST http://127.0.0.1:8000/api/ask \
   -d '{"question":"What should I discuss at an antenatal appointment?","stage":"pregnancy"}'
 ```
 
-## Test status
+## Automated tests
 
-The repository currently includes the application code. Tests and a formal clinical evaluation dataset must be added and executed before any performance results are represented as evidence. Do not claim pilot outcomes from this repository.
+The repository includes unit and local API tests. Run them with:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+A GitHub Actions workflow runs this test suite on pushes and pull requests to `main`. These software tests do not establish clinical accuracy, clinical safety, or pilot readiness.
 
 ## Clinical and safeguarding requirements before a pilot
 
@@ -58,13 +64,15 @@ The repository currently includes the application code. Tests and a formal clini
 6. Obtain required ethical, regulatory and safeguarding approvals before recruiting participants.
 7. Define stop/go criteria and require clinical sign-off before participant-facing deployment.
 
+See `docs/CLINICAL_REVIEW_CHECKLIST.md` and `docs/PILOT_READINESS.md`.
+
 ## Privacy and security
 
-Do not enter real patient details or identifiable health information. Do not commit API keys, passwords, credentials or production data. Appointment reminders are stored in the browser's local storage on that device; they are not sent to a provider and are not synced to a server.
+Do not enter real patient details or identifiable health information. Do not commit API keys, passwords, credentials or production data. Appointment reminders are stored in the browser's local storage on that device; they are not sent to a provider and are not synced to a server. See `SECURITY.md`.
 
 ## Open-source and content licensing
 
-The source code is intended for open review under the licence included in this repository. Starter clinical information links to external sources; source terms and attribution requirements should be checked before reuse. Clinical content is not approved for clinical use.
+The source code is released under the MIT License. Starter clinical information links to external sources; source terms and attribution requirements should be checked before reuse. Clinical content is not approved for clinical use.
 
 ## Project
 
