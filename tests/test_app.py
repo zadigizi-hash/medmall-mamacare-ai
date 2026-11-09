@@ -15,7 +15,7 @@ class KnowledgeTests(unittest.TestCase):
         self.assertEqual(results[0]["id"], "antenatal-care")
 
     def test_unmatched_question_does_not_invent_answer(self):
-        result = answer_question("Can you explain the latest stock market index?")
+        result = answer_question("Explain quantum chromodynamics and the Andromeda galaxy.")
         self.assertIn("not have enough information", result["answer"])
         self.assertEqual(result["status"], "no_match_not_a_safety_clearance")
 
