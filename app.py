@@ -169,7 +169,7 @@ loadArticles();renderReminders();
 class Handler(BaseHTTPRequestHandler):
     server_version = "MamaCarePrototype/0.1"
 
-    def headers(self, kind: str = "application/json; charset=utf-8") -> None:
+    def _send_headers(self, kind: str = "application/json; charset=utf-8") -> None:
         self.send_header("Content-Type", kind)
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("X-Frame-Options", "DENY")
@@ -179,7 +179,7 @@ class Handler(BaseHTTPRequestHandler):
     def respond(self, payload: Any, status: int = 200) -> None:
         raw = json.dumps(payload, ensure_ascii=False).encode()
         self.send_response(status)
-        self.headers()
+        self._send_headers()
         self.send_header("Content-Length", str(len(raw)))
         self.end_headers()
         self.wfile.write(raw)
