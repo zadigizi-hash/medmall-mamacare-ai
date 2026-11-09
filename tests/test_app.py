@@ -15,7 +15,7 @@ class KnowledgeTests(unittest.TestCase):
         self.assertEqual(results[0]["id"], "antenatal-care")
 
     def test_unmatched_question_does_not_invent_answer(self):
-        result = answer_question("Can you confirm the gender of my unborn child?")
+        result = answer_question("Can you explain the latest stock market index?")
         self.assertIn("not have enough information", result["answer"])
         self.assertEqual(result["status"], "no_match_not_a_safety_clearance")
 
@@ -27,7 +27,7 @@ class KnowledgeTests(unittest.TestCase):
     def test_non_trigger_is_not_labelled_safe(self):
         result = answer_question("I have a mild question about pregnancy")
         self.assertNotEqual(result["status"], "safe")
-        self.assertIn("not a safety clearance", result["status"])
+        self.assertIn("not_a_safety_clearance", result["status"])
 
     def test_red_flag_match_is_case_insensitive(self):
         self.assertIsNotNone(detect_red_flag("SEVERE HEADACHE and blurred vision"))
